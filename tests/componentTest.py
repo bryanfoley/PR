@@ -33,7 +33,7 @@ def main():
     print('Overlap detected in the following cars:')
     print(results)
     if(results==[(0,1)]):
-        print('No overlap detected, Result is OK!')
+        print('One Overlap detected, Result is OK!')
     else:
         print('The incorrect overlap was detected! NOK!')
 
