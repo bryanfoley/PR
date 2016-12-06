@@ -59,14 +59,6 @@ def get_intersections(cars_x, cars_y, cars_width=None, cars_height=None,
                    abs(car_y - other_car_y) < max_distance_height:
                     result.append((i, j))
             else:
-                if car_is_circular and not other_car_is_circular:
-                    car_x, other_car_x = other_car_x, car_x
-                    car_y, other_car_y = other_car_y, car_y
-                    halfwidth, other_halfwidth = other_halfwidth, halfwidth
-                    halfheight, other_halfheight = other_halfheight, halfheight
-                    car_is_circular, other_car_is_circular = \
-                        other_car_is_circular, car_is_circular
-
                 found_intersection = False
 
                 # Step 1: point-in-circle test of corners
@@ -74,6 +66,7 @@ def get_intersections(cars_x, cars_y, cars_width=None, cars_height=None,
                            (car_x - halfwidth, car_y + halfheight),
                            (car_x + halfwidth, car_y - halfheight),
                            (car_x + halfwidth, car_y + halfheight)]
+                           
                 for corner_x, corner_y in corners:
                     if sqr(corner_x - other_car_x) + \
                        sqr(corner_y - other_car_y) < sqr(other_halfwidth):
