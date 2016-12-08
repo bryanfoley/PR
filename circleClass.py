@@ -1,7 +1,7 @@
 from shapeClass import Shape
 from pointClass import Point
 
-class Circle(Point):
+class Circle(Shape):
 
     def __init__(self,r,x,y):
         Shape._shapeCount +=1

@@ -1,7 +1,7 @@
 from shapeClass import Shape
 from pointClass import Point
 
-class Quadrilateral(Point):
+class Quadrilateral(Shape):
     def __init__(self,A=(-2,1),B=(2,1),C=(2,-1),D=(-2,-1),
                 thetaA=1.5708,thetaB=1.5708,thetaC=1.5708,thetaD=1.5708):
         self._topLeft = Point()

@@ -7,6 +7,8 @@ from shapeClass import Shape
 from pointClass import Point
 from circleClass import Circle
 from quadrilateralClass import Quadrilateral
+from squareClass import Square
+from rectangleClass import Rectangle
 
 class TestCircularCollisions(unittest.TestCase):
 
@@ -242,6 +244,78 @@ class TestQuadrilateralClass(unittest.TestCase):
 		self.assertEqual(result1,0)
 		result2 = self.q2.getQuadrilateral()
 		self.assertEqual(result2, [(-8,2),(8,2),(8,-2),(-8,-2),1.5708,1.5709,1.5710,1.5711])
+
+class TestSquareClass(unittest.TestCase):
+	def setUp(self):
+		self.sq1 = Square(2.0,2.0,2.0)
+		self.sq2 = Square(1.0,1.0,1.0)
+
+	def tearDown(self):
+		del self.sq1
+		del self.sq2
+
+	def test_H001_test_square_creation(self):
+		result1 = self.sq1.getShapeCount()
+		self.assertEqual(result1,2)
+		result2 = self.sq1.x()
+		self.assertEqual(result2,2.0)
+		result3 = self.sq1.y()
+		self.assertEqual(result3,2.0)
+		result4 = self.sq1.getWidth()
+		self.assertEqual(result4,2.0)
+		result5 = self.sq1.getHalfWidth()
+		self.assertEqual(result5,1.0)
+		result6 = self.sq1.getHeight()
+		self.assertEqual(result6,2.0)
+		result7 = self.sq1.getHalfHeight()
+		self.assertEqual(result7,1.0)
+		result8 = self.sq1.getCOM()
+		self.assertEqual(result8,(2.0,2.0))
+		result9 = self.sq1.getShapeNum()
+		self.assertEqual(result9,1)
+
+	def test_H002_test_square_get_set_COM(self):
+		result1 = self.sq2.getCOM()
+		self.assertEqual(result1,(1.0,1.0))
+		self.sq2.setCOM(4.0,4.0)
+		result2 = self.sq2.getCOM()
+		self.assertEqual(result2,(4.0,4.0))
+
+class TestRectangleClass(unittest.TestCase):
+	def setUp(self):
+		self.rec1 = Rectangle(2.0,2.0,2.0,3.0)
+		self.rec2 = Rectangle(1.0,1.0,1.0,4.0)
+
+	def tearDown(self):
+		del self.rec1
+		del self.rec2
+
+	def test_I001_test_rectangle_creation(self):
+		result1 = self.rec1.getShapeCount()
+		self.assertEqual(result1,2)
+		result2 = self.rec1.x()
+		self.assertEqual(result2,2.0)
+		result3 = self.rec1.y()
+		self.assertEqual(result3,2.0)
+		result4 = self.rec1.getWidth()
+		self.assertEqual(result4,2.0)
+		result5 = self.rec1.getHalfWidth()
+		self.assertEqual(result5,1.0)
+		result6 = self.rec1.getHeight()
+		self.assertEqual(result6,3.0)
+		result7 = self.rec1.getHalfHeight()
+		self.assertEqual(result7,1.5)
+		result8 = self.rec1.getCOM()
+		self.assertEqual(result8,(2.0,2.0))
+		result9 = self.rec1.getShapeNum()
+		self.assertEqual(result9,1)
+
+	def test_I002_test_rectangle_get_set_COM(self):
+		result1 = self.rec2.getCOM()
+		self.assertEqual(result1,(1.0,1.0))
+		self.rec2.setCOM(4.0,4.0)
+		result2 = self.rec2.getCOM()
+		self.assertEqual(result2,(4.0,4.0))
 
 if __name__ == '__main__':
     unittest.main()
