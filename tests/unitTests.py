@@ -6,6 +6,7 @@ import assignment
 from shapeClass import Shape
 from pointClass import Point
 from circleClass import Circle
+from quadrilateralClass import Quadrilateral
 
 class TestCircularCollisions(unittest.TestCase):
 
@@ -181,6 +182,66 @@ class TestCircleClass(unittest.TestCase):
 		self.c2.setCOM(2.0,2.0)
 		result2 = self.c2.getCOM()
 		self.assertEqual(result2,(2.0,2.0))
+
+class TestQuadrilateralClass(unittest.TestCase):
+	def setUp(self):
+		self.q1 = Quadrilateral()
+		self.q2 = Quadrilateral((-4,2),(4,2),(4,-2),(-4,-2),1.5708,1.5709,1.5710,1.5711)
+
+	def tearDown(self):
+		del self.q1
+		del self.q2
+
+	def test_G001_test_quadrilateral_implicit_creation(self):
+		result1 = self.q1.getShapeCount()
+		self.assertEqual(result1,0)
+		result2 = self.q1.getTopLeft()
+		self.assertEqual(result2,(-2,1))
+		result3 = self.q1.getTopRight()
+		self.assertEqual(result3,(2,1))
+		result4 = self.q1.getBottomRight()
+		self.assertEqual(result4,(2,-1))
+		result5 = self.q1.getBottomLeft()
+		self.assertEqual(result5,(-2,-1))
+		result6 = self.q1.getAngleA()
+		self.assertEqual(result6,1.5708)
+		result7 = self.q1.getAngleB()
+		self.assertEqual(result7,1.5708)
+		result8 = self.q1.getAngleC()
+		self.assertEqual(result8,1.5708)
+		result9 = self.q1.getAngleD()
+		self.assertEqual(result9,1.5708)
+		result10 = self.q1.getCOM()
+		self.assertEqual(result10,"Quadrilateral object is returning COM")
+
+	def test_G002_test_quadriilateral_explicit_creation(self):
+		result1 = self.q2.getShapeCount()
+		self.assertEqual(result1,0)
+		result2 = self.q2.getTopLeft()
+		self.assertEqual(result2,(-4,2))
+		result3 = self.q2.getTopRight()
+		self.assertEqual(result3,(4,2))
+		result4 = self.q2.getBottomRight()
+		self.assertEqual(result4,(4,-2))
+		result5 = self.q2.getBottomLeft()
+		self.assertEqual(result5,(-4,-2))
+		result6 = self.q2.getAngleA()
+		self.assertEqual(result6,1.5708)
+		result7 = self.q2.getAngleB()
+		self.assertEqual(result7,1.5709)
+		result8 = self.q2.getAngleC()
+		self.assertEqual(result8,1.5710)
+		result9 = self.q2.getAngleD()
+		self.assertEqual(result9,1.5711)
+		result10 = self.q2.getCOM()
+		self.assertEqual(result10,"Quadrilateral object is returning COM")
+
+	def test_G003_test_quadriilateral_set(self):
+		self.q2.setQuadrilateral((-8,2),(8,2),(8,-2),(-8,-2),1.5708,1.5709,1.5710,1.5711)
+		result1 = self.q2.getShapeCount()
+		self.assertEqual(result1,0)
+		result2 = self.q2.getQuadrilateral()
+		self.assertEqual(result2, [(-8,2),(8,2),(8,-2),(-8,-2),1.5708,1.5709,1.5710,1.5711])
 
 if __name__ == '__main__':
     unittest.main()
