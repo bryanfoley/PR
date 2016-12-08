@@ -1,0 +1,17 @@
+The Plaxis Racer code contains two types of tests, Unit Tests and a Component Test.
+To run the tests, simply change directory to the tests dir and execute:
+	'python3 unitTests.py -v' 
+to run the Unit Tests, and,
+	'python3 componentTest.py'
+to run the Component Test.
+
+The Unit Tests will perform simple checks on the attributes and member functions of all classes, but these must be maintained
+if there are new deliveries.
+The component test, will check on the full behaviour of the class instances and the algorithm used to detect collisions between the objects.
+
+Obsolete unit tests do not have to be deleted, they can be set to disabled via the decorator '@unittest.disable('reason here')' above the 
+unit test class definition.
+
+The component test should never be disabled as it is the overall check of functionality. Tests can be altered but never disabled.
+
+A successful run of all enabled test cases is required before commit and integration.
