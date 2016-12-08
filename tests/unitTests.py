@@ -10,6 +10,7 @@ from quadrilateralClass import Quadrilateral
 from squareClass import Square
 from rectangleClass import Rectangle
 
+@unittest.skip("Skipped as they are obsolete")
 class TestCircularCollisions(unittest.TestCase):
 
 	def setUp(self):
@@ -41,7 +42,8 @@ class TestCircularCollisions(unittest.TestCase):
 		self.cars_y = self.cars_x
 		self.result = assignment.get_intersections(self.cars_x, self.cars_y,self.cars_width,self.cars_height, self.cars_is_circular)
 		self.assertEqual([(0,1)],self.result)
-		
+
+@unittest.skip("Skipped as they are obsolete")		
 class TestRectangularCollisions(unittest.TestCase):
 
 	def setUp(self):
@@ -67,7 +69,8 @@ class TestRectangularCollisions(unittest.TestCase):
 		self.cars_y = self.cars_x
 		self.result = assignment.get_intersections(self.cars_x, self.cars_y,self.cars_width,self.cars_height, self.cars_is_circular)
 		self.assertEqual([(0,1)],self.result)
-		
+
+@unittest.skip("Skipped as they are obsolete")		
 class TestRectangularCircularCollisions(unittest.TestCase):
 
 	def setUp(self):
@@ -154,7 +157,7 @@ class TestPointClass(unittest.TestCase):
 
 class TestCircleClass(unittest.TestCase):
 	def setUp(self):
-		self.c1 = Circle(1.0,0.0,0.0)
+		self.c1 = Circle(0.0,0.0,1.0)
 		self.c2 = Circle(1.0,1.0,1.0)
 
 	def tearDown(self):
@@ -177,8 +180,10 @@ class TestCircleClass(unittest.TestCase):
 		self.c2.setRadius(3.0)
 		result7 = self.c2.getRadius()
 		self.assertEqual(result7,3.0)
+		result8 = self.c1.getName()
+		self.assertEqual(result8,'Circle')
 
-	def test_F002_test_point_get_COM(self):
+	def test_F002_test_circle_get_COM(self):
 		result1 = self.c1.getCOM()
 		self.assertEqual(result1,(0.0,0.0))
 		self.c2.setCOM(2.0,2.0)
@@ -215,6 +220,14 @@ class TestQuadrilateralClass(unittest.TestCase):
 		self.assertEqual(result9,1.5708)
 		result10 = self.q1.getCOM()
 		self.assertEqual(result10,"Quadrilateral object is returning COM")
+		result11 = self.q1.getBottom()
+		self.assertEqual(result11,-1.0)
+		result12 = self.q1.getTop()
+		self.assertEqual(result12,1.0)
+		result13 = self.q1.getLeft()
+		self.assertEqual(result13,-2.0)
+		result14 = self.q1.getRight()
+		self.assertEqual(result14,2.0)
 
 	def test_G002_test_quadriilateral_explicit_creation(self):
 		result1 = self.q2.getShapeCount()
@@ -273,6 +286,8 @@ class TestSquareClass(unittest.TestCase):
 		self.assertEqual(result8,(2.0,2.0))
 		result9 = self.sq1.getShapeNum()
 		self.assertEqual(result9,1)
+		result10 = self.sq1.getName()
+		self.assertEqual(result10,'Square')
 
 	def test_H002_test_square_get_set_COM(self):
 		result1 = self.sq2.getCOM()
@@ -309,6 +324,8 @@ class TestRectangleClass(unittest.TestCase):
 		self.assertEqual(result8,(2.0,2.0))
 		result9 = self.rec1.getShapeNum()
 		self.assertEqual(result9,1)
+		result10 = self.rec1.getName()
+		self.assertEqual(result10,'Rectangle')
 
 	def test_I002_test_rectangle_get_set_COM(self):
 		result1 = self.rec2.getCOM()
