@@ -3,9 +3,10 @@ from pointClass import Point
 
 class Circle(Shape):
 
-    def __init__(self,r,x,y):
+    def __init__(self,x,y,r):
         Shape._shapeCount +=1
         self._shapeNum = Shape._shapeCount
+        self._shapeName = __class__.__name__
         self._r = r
         self._point = Point(x,y)
         self._COM = self._point.getPoint()
@@ -46,3 +47,6 @@ class Circle(Shape):
 
     def getShapeNum(self):
         return self._shapeNum
+
+    def getName(self):
+        return self._shapeName

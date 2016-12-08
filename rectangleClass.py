@@ -5,6 +5,7 @@ class Rectangle(Shape):
     def __init__(self,x,y,width,height):
         Shape._shapeCount +=1
         self._shapeNum = Shape._shapeCount
+        self._shapeName = __class__.__name__
         self._width = width
         self._height = height
         self.createVertices(x,y)
@@ -47,3 +48,19 @@ class Rectangle(Shape):
 
     def getShapeNum(self):
         return self._shapeNum
+
+    def getName(self):
+        return self._shapeName
+
+    def left(self):
+        return self._quad.getLeft()
+
+    def right(self):
+        return self._quad.getRight()
+
+    def top(self):
+        return self._quad.getTop()
+
+    def bottom(self):
+        return self._quad.getBottom()
+
