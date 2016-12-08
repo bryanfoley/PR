@@ -4,6 +4,7 @@ import sys
 sys.path.append('../')
 import assignment
 from shapeClass import Shape
+from pointClass import Point
 
 class TestCircularCollisions(unittest.TestCase):
 
@@ -116,6 +117,36 @@ class TestShapeClass(unittest.TestCase):
 	def test_D002_test_shape_get_COM(self):
 		result = self.s1.getCOM()
 		self.assertEqual(result,"Shape object is returning COM")
+
+class TestPointClass(unittest.TestCase):
+	def setUp(self):
+		self.p1 = Point()
+		self.p2 = Point(1.0,1.0)
+
+	def tearDown(self):
+		del self.p1
+		del self.p2
+
+	def test_E001_test_point_creation(self):
+		result1 = self.p1.getShapeCount()
+		self.assertEqual(result1,0)
+		result2 = self.p1.x()
+		self.assertEqual(result2,0.0)
+		result3 = self.p1.y()
+		self.assertEqual(result3,0.0)
+		result4 = self.p1.getPoint()
+		self.assertEqual(result4,(0.0,0.0))
+		self.p1.setPoint(2.0,2.0)
+		result5 = self.p1.getPoint()
+		self.assertEqual(result5,(2.0,2.0))
+		result6 = self.p2.getPoint()
+		self.assertEqual(result6,(1.0,1.0))
+
+	def test_E002_test_point_get_COM(self):
+		result = self.p1.getCOM()
+		self.assertEqual(result,"Point object is returning COM")
+		result = self.p2.getCOM()
+		self.assertEqual(result,"Point object is returning COM")
 
 if __name__ == '__main__':
     unittest.main()
