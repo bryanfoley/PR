@@ -5,6 +5,7 @@ sys.path.append('../')
 import assignment
 from shapeClass import Shape
 from pointClass import Point
+from circleClass import Circle
 
 class TestCircularCollisions(unittest.TestCase):
 
@@ -147,6 +148,39 @@ class TestPointClass(unittest.TestCase):
 		self.assertEqual(result,"Point object is returning COM")
 		result = self.p2.getCOM()
 		self.assertEqual(result,"Point object is returning COM")
+
+class TestCircleClass(unittest.TestCase):
+	def setUp(self):
+		self.c1 = Circle(1.0,0.0,0.0)
+		self.c2 = Circle(1.0,1.0,1.0)
+
+	def tearDown(self):
+		del self.c1
+		del self.c2
+
+	def test_F001_test_circle_creation(self):
+		result1 = self.c1.getShapeCount()
+		self.assertEqual(result1,2)
+		result2 = self.c1.getRadius()
+		self.assertEqual(result2,1.0)
+		result3 = self.c1.getWidth()
+		self.assertEqual(result3,2.0)
+		result4 = self.c1.getHeight()
+		self.assertEqual(result4,2.0)
+		result5 = self.c1.getHalfWidth()
+		self.assertEqual(result5,1.0)
+		result6 = self.c1.getHalfHeight()
+		self.assertEqual(result6,1.0)
+		self.c2.setRadius(3.0)
+		result7 = self.c2.getRadius()
+		self.assertEqual(result7,3.0)
+
+	def test_F002_test_point_get_COM(self):
+		result1 = self.c1.getCOM()
+		self.assertEqual(result1,(0.0,0.0))
+		self.c2.setCOM(2.0,2.0)
+		result2 = self.c2.getCOM()
+		self.assertEqual(result2,(2.0,2.0))
 
 if __name__ == '__main__':
     unittest.main()
