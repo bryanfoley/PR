@@ -2,7 +2,7 @@ from shapeClass import Shape
 from pointClass import Point
 
 class Quadrilateral(Shape):
-    def __init__(self,A=(-2,1),B=(2,1),C=(2,-1),D=(-2,-1),
+    def __init__(self,A=(-2.0,1.0),B=(2.0,1.0),C=(2.0,-1.0),D=(-2.0,-1.0),
                 thetaA=1.5708,thetaB=1.5708,thetaC=1.5708,thetaD=1.5708):
         self._topLeft = Point()
         self._topRight = Point()
@@ -23,6 +23,10 @@ class Quadrilateral(Shape):
         self._angleB = thetaB
         self._angleC = thetaC
         self._angleD = thetaD
+        self._top = min(A[1],B[1])
+        self._bottom = max(C[1],D[1])
+        self._left = min(A[0],D[0])
+        self._right = max(B[0],C[0]) 
 
     def getQuadrilateral(self):
         return [self.getTopLeft(),self.getTopRight(),
@@ -56,3 +60,15 @@ class Quadrilateral(Shape):
 
     def getCOM(self):
         return "Quadrilateral object is returning COM"
+
+    def getLeft(self):
+        return self._left
+
+    def getRight(self):
+        return self._right
+
+    def getTop(self):
+        return self._top
+
+    def getBottom(self):
+        return self._bottom
