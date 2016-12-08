@@ -3,6 +3,7 @@ import sys
 
 sys.path.append('../')
 import assignment
+from shapeClass import Shape
 
 class TestCircularCollisions(unittest.TestCase):
 
@@ -100,6 +101,21 @@ class TestRectangularCircularCollisions(unittest.TestCase):
 		self.cars_y = self.cars_x
 		self.result = assignment.get_intersections(self.cars_x, self.cars_y,self.cars_width,self.cars_height, self.cars_is_circular)
 		self.assertEqual([(0,1)],self.result)
+
+class TestShapeClass(unittest.TestCase):
+	def setUp(self):
+		self.s1 = Shape()
+
+	def tearDown(self):
+		del self.s1
+
+	def test_D001_test_shape_creation(self):
+		result = self.s1.getShapeCount()
+		self.assertEqual(result,0)
+
+	def test_D002_test_shape_get_COM(self):
+		result = self.s1.getCOM()
+		self.assertEqual(result,"Shape object is returning COM")
 
 if __name__ == '__main__':
     unittest.main()
