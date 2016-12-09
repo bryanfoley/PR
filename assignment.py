@@ -12,42 +12,23 @@ def get_intersections(cars):
     return results
 
 def carOverlap(carA,carB):
-    xOverlap = False
-    yOverlap = False
-
+    
     #Check for similar Centre of Mass (COM)
     if (carA.getCOM()==carB.getCOM()):
-        xOverlap = True
-        yOverlap = True
+        return True
     #Else move onto the other detection methods
-    else:
+    else:      
         #Two Circle objects
         if (carA.getName()=='Circle' and carB.getName()=='Circle'):
-            if( doTouch(carA,carB)):
-                xOverlap = True
-                xOverlap = True
-
-        #Two Square/Rectangle objects
+            return (circleXcircle(carA,carB))
+        
+        #Two Quadrilateral objects
         elif (carA.getName() != 'Circle' and carB.getName != 'Circle'):
-            if ( (valueInRange(carA.x(),carB.left(), carB.right())) or 
-               ( valueInRange(carB.x(), carA.left(), carA.right()))):
-                xOverlap = True
-    
-            if ( (valueInRange(carA.y(), carB.bottom(), carB.top())) or
-               ( valueInRange(carB.y(), carA.bottom(), carA.top()))):
-                yOverlap = True
+            return (quadXquad(carA,carB))
+
+        #Quadrilateral object and Circle Object        
         else:
-            #Square/Rectangle object and Circle Object
-            xDistance = math.fabs(carA.x() - carB.x())
-            yDistance = math.fabs(carA.y() - carB.y())
-            
-            if (xDistance <= carA.getHalfWidth() + carB.getHalfWidth()):
-                xOverlap = True
-
-            if (yDistance <= carA.getHalfHeight() + carB.getHalfHeight()):
-                yOverlap = True
-
-    return (xOverlap and yOverlap)
+            return (quadXcircle(carA,carB))
 
 def valueInRange(value, min, max):
     return ((value >= min) and (value <= max))
@@ -55,8 +36,25 @@ def valueInRange(value, min, max):
 def sqr(x):
     return x*x
 
-def doTouch(carA,carB):
-    result = False
-    if ( math.sqrt(sqr(carB.x() - carA.x()) + sqr(carB.y() - carA.y())) <= carA.getHalfWidth() + carB.getHalfWidth()):
-        result = True
-    return result
+def circleXcircle(carA,carB):
+    return ( math.sqrt(sqr(carB.x() - carA.x()) + sqr(carB.y() - carA.y())) \
+             <= carA.getHalfWidth() + carB.getHalfWidth() )
+
+def quadXquad(carA,carB):
+    xOverlap = ((valueInRange(carA.x(),carB.left(), carB.right())) or 
+               ( valueInRange(carB.x(), carA.left(), carA.right())))
+    
+    yOverlap = ( (valueInRange(carA.y(), carB.bottom(), carB.top())) or
+               ( valueInRange(carB.y(), carA.bottom(), carA.top())))
+
+    return(xOverlap and yOverlap)
+
+def quadXcircle(carA,carB):
+    xDistance = math.fabs(carA.x() - carB.x())
+    yDistance = math.fabs(carA.y() - carB.y())
+            
+    xOverlap = (xDistance <= carA.getHalfWidth() + carB.getHalfWidth())
+
+    yOverlap = (yDistance <= carA.getHalfHeight() + carB.getHalfHeight())
+
+    return (xOverlap and yOverlap)
