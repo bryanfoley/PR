@@ -12,7 +12,7 @@ def get_intersections(cars):
     return results
 
 def carOverlap(carA,carB):
-    
+
     #Check for similar Centre of Mass (COM)
     if (carA.getCOM()==carB.getCOM()):
         return True
@@ -30,9 +30,6 @@ def carOverlap(carA,carB):
         else:
             return (quadXcircle(carA,carB))
 
-def valueInRange(value, min, max):
-    return ((value >= min) and (value <= max))
-
 def sqr(x):
     return x*x
 
@@ -41,11 +38,15 @@ def circleXcircle(carA,carB):
              <= carA.getHalfWidth() + carB.getHalfWidth() )
 
 def quadXquad(carA,carB):
-    xOverlap = ((valueInRange(carA.x(),carB.left(), carB.right())) or 
-               ( valueInRange(carB.x(), carA.left(), carA.right())))
+    xOverlap = ((valueInRange(carA.left(), carB.left(), carB.right())) or 
+                (valueInRange(carA.right(),carB.left(), carB.right())) or
+                (valueInRange(carB.left(), carA.left(), carA.right())) or
+                (valueInRange(carB.right(), carA.left(), carA.right())) )
     
-    yOverlap = ( (valueInRange(carA.y(), carB.bottom(), carB.top())) or
-               ( valueInRange(carB.y(), carA.bottom(), carA.top())))
+    yOverlap = ((valueInRange(carA.top(), carB.bottom(), carB.top())) or
+                (valueInRange(carA.bottom(), carB.bottom(), carB.top())) or
+                (valueInRange(carB.top(), carA.bottom(), carA.top())) or
+               (valueInRange(carB.bottom(), carA.bottom(), carA.top())) )
 
     return(xOverlap and yOverlap)
 
@@ -58,3 +59,6 @@ def quadXcircle(carA,carB):
     yOverlap = (yDistance <= carA.getHalfHeight() + carB.getHalfHeight())
 
     return (xOverlap and yOverlap)
+
+def valueInRange(value, min, max):
+    return ((value >= min) and (value <= max))

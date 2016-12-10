@@ -11,6 +11,10 @@ class Circle(Shape):
         self._r = math.fabs(r)
         self._point = Point(x,y)
         self._COM = self._point.getPoint()
+        self._top = y+self._r
+        self._bottom = y-self._r
+        self._left = x-self._r
+        self._right = x+self._r
 
     def __del__(self):
         class_name = self.__class__.__name__
@@ -51,3 +55,15 @@ class Circle(Shape):
 
     def getName(self):
         return self._shapeName
+
+    def left(self):
+        return self._left
+
+    def right(self):
+        return self._right
+
+    def top(self):
+        return self._top
+
+    def bottom(self):
+        return self._bottom

@@ -23,8 +23,8 @@ class Quadrilateral(Shape):
         self._angleB = thetaB
         self._angleC = thetaC
         self._angleD = thetaD
-        self._top = min(A[1],B[1])
-        self._bottom = max(C[1],D[1])
+        self._top = max(A[1],B[1])
+        self._bottom = min(C[1],D[1])
         self._left = min(A[0],D[0])
         self._right = max(B[0],C[0]) 
 
