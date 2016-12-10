@@ -14,7 +14,7 @@ class Truck(Automobile):
                                 roof=Circle(x+10,y,5),
                                 hood=Square(x+12.5,y-2.5,5),
                                 wheel1=Circle(x-7,y-5,1),
-                                wheel2=Circle(x+1.25,y-5,1))
+                                wheel2=Circle(x+12.5,y-5,1))
         self._top = self._components[max(self._components,key = lambda i: self._components[i].top())].top()
         self._bottom = self._components[min(self._components,key = lambda i: self._components[i].bottom())].bottom()
         self._left = self._components[min(self._components,key = lambda i: self._components[i].left())].left()
