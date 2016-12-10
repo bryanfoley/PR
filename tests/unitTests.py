@@ -11,6 +11,7 @@ from squareClass import Square
 from rectangleClass import Rectangle
 from automobileClass import Automobile
 from carClass import Car
+from truckClass import Truck
 
 class TestCircularCollisions(unittest.TestCase):
 	#Test the function circleXcircle(ShapeA, ShapeB)
@@ -373,7 +374,7 @@ class TestCarClass(unittest.TestCase):
 		del self.car1
 		del self.car2
 
-	def test_I001_test_car_creation(self):
+	def test_K001_test_car_creation(self):
 		result1 = self.car1.getAutomobileCount()
 		self.assertEqual(result1,2)
 		result2 = self.car1.left()
@@ -391,13 +392,32 @@ class TestCarClass(unittest.TestCase):
 		result8 = self.car1.getAutoName()
 		self.assertEqual(result8,'Car')
 
-	@unittest.skip('Not needed')
-	def test_I002_test_rectangle_get_set_COM(self):
-		result1 = self.rec2.getCOM()
-		self.assertEqual(result1,(1.0,1.0))
-		self.rec2.setCOM(4.0,4.0)
-		result2 = self.rec2.getCOM()
-		self.assertEqual(result2,(4.0,4.0))
+class TestTruckClass(unittest.TestCase):
+	def setUp(self):
+		self.truck1 = Truck(0.0,0.0)
+		self.truck2 = Truck(1.0,1.0)
+
+	def tearDown(self):
+		del self.truck1
+		del self.truck2
+
+	def test_L001_test_truck_creation(self):
+		result1 = self.truck1.getAutomobileCount()
+		self.assertEqual(result1,2)
+		result2 = self.truck1.left()
+		self.assertEqual(result2,-10)
+		result3 = self.truck1.right()
+		self.assertEqual(result3,15)
+		result4 = self.truck1.top()
+		self.assertEqual(result4,5)
+		result5 = self.truck1.bottom()
+		self.assertEqual(result5,-6)
+		result6 = self.truck1.getCOM()
+		self.assertEqual(result6,(0.0,0.0))
+		result7 = self.truck1.getAutoNum()
+		self.assertEqual(result7,1)
+		result8 = self.truck1.getAutoName()
+		self.assertEqual(result8,'Truck')
 
 if __name__ == '__main__':
     unittest.main()
