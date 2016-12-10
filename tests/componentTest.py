@@ -155,5 +155,14 @@ def main():
     del c1
     del sq1
 
+    #TEST005: An empty list is passed in 
+
+    #List to store cars (shape objects)
+    cars=[]
+
+    #Send the list an empty list.
+    #The function 'get_intersections()' will print a message to screen and exit
+    result = assignment.get_intersections(cars)
+        
 if __name__ == '__main__':
     main()
