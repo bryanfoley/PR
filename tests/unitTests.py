@@ -12,6 +12,7 @@ from rectangleClass import Rectangle
 from automobileClass import Automobile
 from carClass import Car
 from truckClass import Truck
+from busClass import Bus
 
 class TestCircularCollisions(unittest.TestCase):
 	#Test the function circleXcircle(ShapeA, ShapeB)
@@ -418,6 +419,33 @@ class TestTruckClass(unittest.TestCase):
 		self.assertEqual(result7,1)
 		result8 = self.truck1.getAutoName()
 		self.assertEqual(result8,'Truck')
+
+class TestBusClass(unittest.TestCase):
+	def setUp(self):
+		self.bus1 = Bus(0.0,0.0)
+		self.bus2 = Bus(1.0,1.0)
+
+	def tearDown(self):
+		del self.bus1
+		del self.bus2
+
+	def test_M001_test_bus_creation(self):
+		result1 = self.bus1.getAutomobileCount()
+		self.assertEqual(result1,2)
+		result2 = self.bus1.left()
+		self.assertEqual(result2,-10)
+		result3 = self.bus1.right()
+		self.assertEqual(result3,15)
+		result4 = self.bus1.top()
+		self.assertEqual(result4,5)
+		result5 = self.bus1.bottom()
+		self.assertEqual(result5,-6)
+		result6 = self.bus1.getCOM()
+		self.assertEqual(result6,(0.0,0.0))
+		result7 = self.bus1.getAutoNum()
+		self.assertEqual(result7,1)
+		result8 = self.bus1.getAutoName()
+		self.assertEqual(result8,'Bus')
 
 if __name__ == '__main__':
     unittest.main()
