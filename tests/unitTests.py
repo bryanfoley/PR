@@ -9,6 +9,7 @@ from circleClass import Circle
 from quadrilateralClass import Quadrilateral
 from squareClass import Square
 from rectangleClass import Rectangle
+from automobileClass import Automobile
 
 class TestCircularCollisions(unittest.TestCase):
 	#Test the function circleXcircle(ShapeA, ShapeB)
@@ -346,6 +347,21 @@ class TestRectangleClass(unittest.TestCase):
 		self.rec2.setCOM(4.0,4.0)
 		result2 = self.rec2.getCOM()
 		self.assertEqual(result2,(4.0,4.0))
+
+class TestAutomobileClass(unittest.TestCase):
+	def setUp(self):
+		self.a1 = Automobile()
+
+	def tearDown(self):
+		del self.a1
+
+	def test_J001_test_automobile_creation(self):
+		result = self.a1.getAutomobileCount()
+		self.assertEqual(result,0)
+
+	def test_J002_test_automobile_get_COM(self):
+		result = self.a1.getCOM()
+		self.assertEqual(result,"Automobile object is returning COM")
 
 if __name__ == '__main__':
     unittest.main()
