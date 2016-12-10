@@ -10,6 +10,7 @@ from quadrilateralClass import Quadrilateral
 from squareClass import Square
 from rectangleClass import Rectangle
 from automobileClass import Automobile
+from carClass import Car
 
 class TestCircularCollisions(unittest.TestCase):
 	#Test the function circleXcircle(ShapeA, ShapeB)
@@ -362,6 +363,41 @@ class TestAutomobileClass(unittest.TestCase):
 	def test_J002_test_automobile_get_COM(self):
 		result = self.a1.getCOM()
 		self.assertEqual(result,"Automobile object is returning COM")
+
+class TestCarClass(unittest.TestCase):
+	def setUp(self):
+		self.car1 = Car(0.0,0.0)
+		self.car2 = Car(1.0,1.0)
+
+	def tearDown(self):
+		del self.car1
+		del self.car2
+
+	def test_I001_test_car_creation(self):
+		result1 = self.car1.getAutomobileCount()
+		self.assertEqual(result1,2)
+		result2 = self.car1.left()
+		self.assertEqual(result2,-4.0)
+		result3 = self.car1.right()
+		self.assertEqual(result3,4.0)
+		result4 = self.car1.top()
+		self.assertEqual(result4,2.0)
+		result5 = self.car1.bottom()
+		self.assertEqual(result5,-1.5)
+		result6 = self.car1.getCOM()
+		self.assertEqual(result6,(0.0,0.0))
+		result7 = self.car1.getAutoNum()
+		self.assertEqual(result7,1)
+		result8 = self.car1.getAutoName()
+		self.assertEqual(result8,'Car')
+
+	@unittest.skip('Not needed')
+	def test_I002_test_rectangle_get_set_COM(self):
+		result1 = self.rec2.getCOM()
+		self.assertEqual(result1,(1.0,1.0))
+		self.rec2.setCOM(4.0,4.0)
+		result2 = self.rec2.getCOM()
+		self.assertEqual(result2,(4.0,4.0))
 
 if __name__ == '__main__':
     unittest.main()
