@@ -1,6 +1,8 @@
 import sys
 
 sys.path.append('../')
+sys.path.append('../src/shapes')
+sys.path.append('../src/automobiles')
 import assignment
 from carClass import Car
 from truckClass import Truck
