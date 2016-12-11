@@ -1,12 +1,13 @@
+import math
 from shapeClass import Shape
 from quadrilateralClass import Quadrilateral
 
 class Square(Shape):
-    def __init__(self,x,y,side):
+    def __init__(self,x,y,side=1):
         Shape._shapeCount +=1
         self._shapeNum = Shape._shapeCount
         self._shapeName = __class__.__name__
-        self._side = side
+        self._side = math.fabs(side)
         self.createVertices(x,y)
 
     def __del__(self):

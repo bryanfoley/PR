@@ -1,62 +1,98 @@
 import math
 
-def get_intersections(cars):
+def get_intersections(autos):
+    #Ensure that the list is not empty
+    try:
+        if autos == []:
+            raise ValueError
+    except ValueError:
+        return (['Empty list!'])
+
     results = []
-    for carA in cars:
-        for carB in cars:
-            if carB.getShapeNum() <= carA.getShapeNum():
+    for autoA in autos:
+        for autoB in autos:
+            if autoB.getAutoNum() <= autoA.getAutoNum():
                 continue
-            if (carOverlap(carA,carB)):
-                results.append((carA.getShapeNum(),carB.getShapeNum()))
+            if (autoOverlap(autoA,autoB)):
+                results.append((autoA.getAutoNum(),autoB.getAutoNum()))
 
     return results
 
-def carOverlap(carA,carB):
-    xOverlap = False
-    yOverlap = False
-
-    #Check for similar Centre of Mass (COM)
-    if (carA.getCOM()==carB.getCOM()):
-        xOverlap = True
-        yOverlap = True
-    #Else move onto the other detection methods
+def coarseOverlap(autoA,autoB):
+    if(COMoverlap(autoA,autoB)==True):
+        return True
     else:
-        #Two Circle objects
-        if (carA.getName()=='Circle' and carB.getName()=='Circle'):
-            if( doTouch(carA,carB)):
-                xOverlap = True
-                xOverlap = True
+        return (quadXquad(autoA,autoB))
 
-        #Two Square/Rectangle objects
-        elif (carA.getName() != 'Circle' and carB.getName != 'Circle'):
-            if ( (valueInRange(carA.x(),carB.left(), carB.right())) or 
-               ( valueInRange(carB.x(), carA.left(), carA.right()))):
-                xOverlap = True
+def sqr(x):
+    return x*x
+
+def COMoverlap(shapeA,shapeB):
+    return (shapeA.getCOM()==shapeB.getCOM())
+
+def circleXcircle(shapeA,shapeB):
+    return ( math.sqrt(sqr(shapeB.x() - shapeA.x()) + sqr(shapeB.y() - shapeA.y())) \
+             <= shapeA.getHalfWidth() + shapeB.getHalfWidth() )
+
+def quadXquad(shapeA,shapeB):
+    xOverlap = ((valueInRange(shapeA.left(), shapeB.left(), shapeB.right())) or 
+                (valueInRange(shapeA.right(),shapeB.left(), shapeB.right())) or
+                (valueInRange(shapeB.left(), shapeA.left(), shapeA.right())) or
+                (valueInRange(shapeB.right(), shapeA.left(), shapeA.right())) )
     
-            if ( (valueInRange(carA.y(), carB.bottom(), carB.top())) or
-               ( valueInRange(carB.y(), carA.bottom(), carA.top()))):
-                yOverlap = True
-        else:
-            #Square/Rectangle object and Circle Object
-            xDistance = math.fabs(carA.x() - carB.x())
-            yDistance = math.fabs(carA.y() - carB.y())
-            
-            if (xDistance <= carA.getHalfWidth() + carB.getHalfWidth()):
-                xOverlap = True
+    yOverlap = ((valueInRange(shapeA.top(), shapeB.bottom(), shapeB.top())) or
+                (valueInRange(shapeA.bottom(), shapeB.bottom(), shapeB.top())) or
+                (valueInRange(shapeB.top(), shapeA.bottom(), shapeA.top())) or
+               (valueInRange(shapeB.bottom(), shapeA.bottom(), shapeA.top())) )
 
-            if (yDistance <= carA.getHalfHeight() + carB.getHalfHeight()):
-                yOverlap = True
+    return(xOverlap and yOverlap)
+
+def quadXcircle(shapeA,shapeB):
+    xDistance = math.fabs(shapeA.x() - shapeB.x())
+    yDistance = math.fabs(shapeA.y() - shapeB.y())
+            
+    xOverlap = (xDistance <= shapeA.getHalfWidth() + shapeB.getHalfWidth())
+    yOverlap = (yDistance <= shapeA.getHalfHeight() + shapeB.getHalfHeight())
 
     return (xOverlap and yOverlap)
 
 def valueInRange(value, min, max):
     return ((value >= min) and (value <= max))
 
-def sqr(x):
-    return x*x
+def coarseOverlap(autoA,autoB):
+    if(COMoverlap(autoA,autoB)==True):
+        return True
+    else:
+        return (quadXquad(autoA,autoB))
 
-def doTouch(carA,carB):
+def fineOverlap(autoA,autoB):
     result = False
-    if ( math.sqrt(sqr(carB.x() - carA.x()) + sqr(carB.y() - carA.y())) <= carA.getHalfWidth() + carB.getHalfWidth()):
-        result = True
+    for a in autoA.components():
+        #Check initially for a perfect overlap of COM's
+        for b in autoB.components():
+            if (COMoverlap(autoA.components()[a],autoB.components()[b])):
+                return True
+            #Else move onto the other detection methods
+            else:      
+            #Two Circle objects
+                if (autoA.components()[a].getName()=='Circle' and autoB.components()[b].getName()=='Circle'):
+                    if (circleXcircle(autoA.components()[a],autoB.components()[b])):
+                        return True
+        
+                #Two Quadrilateral objects
+                elif (autoA.components()[a].getName() != 'Circle' and autoB.components()[b].getName() != 'Circle'):
+                    if (quadXquad(autoA.components()[a],autoB.components()[b])):
+                        return True
+
+                #Quadrilateral object and Circle Object        
+                else:
+                    if (quadXcircle(autoA.components()[a],autoB.components()[b])):
+                        return True
+
     return result
+
+def autoOverlap(autoA,autoB):
+    if (coarseOverlap(autoA,autoB)):
+        return (fineOverlap(autoA,autoB))
+    else:
+        return False
