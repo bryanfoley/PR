@@ -3,10 +3,10 @@ import math
 def get_intersections(autos):
     #Ensure that the list is not empty
     try:
-        if autos == []:
+        if autos == [] or len(autos)==1:
             raise ValueError
     except ValueError:
-        return (['Empty list!'])
+        return (['Not enough items in the list! Minimum of 2 required.'])
 
     results = []
     for autoA in autos:
