@@ -2,6 +2,8 @@ import unittest
 import sys
 
 sys.path.append('../')
+sys.path.append('../src/shapes')
+sys.path.append('../src/automobiles')
 import assignment
 from shapeClass import Shape
 from pointClass import Point
