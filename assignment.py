@@ -6,37 +6,17 @@ def get_intersections(autos):
         if autos == []:
             raise ValueError
     except ValueError:
-        print('The input list cannot be empty!')
-        exit()
+        return (['Empty list!'])
 
     results = []
     for autoA in autos:
         for autoB in autos:
-            if autoB.getShapeNum() <= autoA.getShapeNum():
+            if autoB.getAutoNum() <= autoA.getAutoNum():
                 continue
             if (autoOverlap(autoA,autoB)):
-                results.append((autoA.getShapeNum(),autoB.getShapeNum()))
+                results.append((autoA.getAutoNum(),autoB.getAutoNum()))
 
     return results
-
-def autoOverlap(AutoA,AutoB):
-
-    #Check for similar Centre of Mass (COM)
-    if (COMoverlap(AutoA,AutoB)):
-        return True
-    #Else move onto the other detection methods
-    else:      
-        #Two Circle objects
-        if (AutoA.getName()=='Circle' and AutoB.getName()=='Circle'):
-            return (circleXcircle(AutoA,AutoB))
-        
-        #Two Quadrilateral objects
-        elif (AutoA.getName() != 'Circle' and AutoB.getName != 'Circle'):
-            return (quadXquad(AutoA,AutoB))
-
-        #Quadrilateral object and Circle Object        
-        else:
-            return (quadXcircle(AutoA,AutoB))
 
 def coarseOverlap(autoA,autoB):
     if(COMoverlap(autoA,autoB)==True):
@@ -84,3 +64,35 @@ def coarseOverlap(autoA,autoB):
         return True
     else:
         return (quadXquad(autoA,autoB))
+
+def fineOverlap(autoA,autoB):
+    result = False
+    for a in autoA.components():
+        #Check initially for a perfect overlap of COM's
+        for b in autoB.components():
+            if (COMoverlap(autoA.components()[a],autoB.components()[b])):
+                return True
+            #Else move onto the other detection methods
+            else:      
+            #Two Circle objects
+                if (autoA.components()[a].getName()=='Circle' and autoB.components()[b].getName()=='Circle'):
+                    if (circleXcircle(autoA.components()[a],autoB.components()[b])):
+                        return True
+        
+                #Two Quadrilateral objects
+                elif (autoA.components()[a].getName() != 'Circle' and autoB.components()[b].getName() != 'Circle'):
+                    if (quadXquad(autoA.components()[a],autoB.components()[b])):
+                        return True
+
+                #Quadrilateral object and Circle Object        
+                else:
+                    if (quadXcircle(autoA.components()[a],autoB.components()[b])):
+                        return True
+
+    return result
+
+def autoOverlap(autoA,autoB):
+    if (coarseOverlap(autoA,autoB)):
+        return (fineOverlap(autoA,autoB))
+    else:
+        return False

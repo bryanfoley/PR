@@ -42,5 +42,8 @@ class Car(Automobile):
         return self._autoName 
 
     def getAutoNum (self):
-        return self._autoNum 
+        return self._autoNum
+
+    def components(self):
+        return self._components
 

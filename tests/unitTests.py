@@ -359,10 +359,12 @@ class TestAutomobileClass(unittest.TestCase):
 		del self.a1
 
 	def test_J001_test_automobile_creation(self):
+		'Test creation of an Automobil object'
 		result = self.a1.getAutomobileCount()
 		self.assertEqual(result,0)
 
 	def test_J002_test_automobile_get_COM(self):
+		'Test the getCOM func of an Automobile Object'
 		result = self.a1.getCOM()
 		self.assertEqual(result,"Automobile object is returning COM")
 
@@ -376,6 +378,7 @@ class TestCarClass(unittest.TestCase):
 		del self.car2
 
 	def test_K001_test_car_creation(self):
+		'Test creation of a Car object'
 		result1 = self.car1.getAutomobileCount()
 		self.assertEqual(result1,2)
 		result2 = self.car1.left()
@@ -403,6 +406,7 @@ class TestTruckClass(unittest.TestCase):
 		del self.truck2
 
 	def test_L001_test_truck_creation(self):
+		'Test creation of a Truck object'
 		result1 = self.truck1.getAutomobileCount()
 		self.assertEqual(result1,2)
 		result2 = self.truck1.left()
@@ -430,6 +434,7 @@ class TestBusClass(unittest.TestCase):
 		del self.bus2
 
 	def test_M001_test_bus_creation(self):
+		'Test creation of a Bus object'
 		result1 = self.bus1.getAutomobileCount()
 		self.assertEqual(result1,2)
 		result2 = self.bus1.left()
@@ -446,6 +451,44 @@ class TestBusClass(unittest.TestCase):
 		self.assertEqual(result7,1)
 		result8 = self.bus1.getAutoName()
 		self.assertEqual(result8,'Bus')
+
+class TestAutoOverlap(unittest.TestCase):
+	def setUp(self):
+		self.car1 = Car(0.0,0.0)
+		self.car2 = Car(0.0,0.0)
+
+	def tearDown(self):
+		del self.car1
+		del self.car2
+
+	def test_N001_test_maximum_overlap(self):
+		'Two cars with a perfect overlap'
+		self.result = assignment.autoOverlap(self.car1,self.car2)
+		self.assertEqual(self.result,True)
+
+	def test_N002_test_no_overlap(self):
+		'Two Cars with no overlap'
+		self.car1 = Car(5.5,5.5)
+		self.result = assignment.autoOverlap(self.car1,self.car2)
+		self.assertEqual(self.result,False)
+
+	def test_N003_test_slight_overlap(self):
+		'Two cars with an appreciable overlap'
+		self.car1 = Car(1.0,1.0)
+		self.result = assignment.autoOverlap(self.car1,self.car2)
+		self.assertEqual(self.result,True)
+
+	def test_N004_test_touching(self):
+		'The back wheel of car2 is touching the front body of car1'
+		self.car2 = Car(7.5,2.5)
+		self.result = assignment.autoOverlap(self.car1,self.car2)
+		self.assertEqual(self.result,True)
+
+	def test_N005_test_bumper_touch(self):
+		'The front body of Car1 is touching the back body of car2'
+		self.car2 = Car(8.0,0.0)
+		self.result = assignment.autoOverlap(self.car1,self.car2)
+		self.assertEqual(self.result,True)
 
 if __name__ == '__main__':
     unittest.main()

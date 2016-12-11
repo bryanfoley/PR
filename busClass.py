@@ -46,3 +46,5 @@ class Bus(Automobile):
     def getAutoNum (self):
         return self._autoNum 
 
+    def components(self):
+        return self._components
