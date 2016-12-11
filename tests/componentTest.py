@@ -149,13 +149,14 @@ def TEST004():
         #TEST004: An empty list is passed in -> get_intersections() returns a list with the string 'Empty list!'
     print('-'*40)
     #List to store cars (shape objects)
+
     autos=[]
 
     #Send the list an empty list.
     #The function 'get_intersections()' will print a message to screen and exit
     result = assignment.get_intersections(autos)
 
-    expected_result = ['Empty list!']
+    expected_result = ['Not enough items in the list! Minimum of 2 required.']
     if(result ==  expected_result):
         print('Expected behaviour detected: TEST004 is OK!')
     else:
