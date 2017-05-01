@@ -11,4 +11,4 @@ class Shape(object):
         return Shape._shapeCount
 
     def getCOM(self):
-        return "Shape object is returning COM"
+        pass
