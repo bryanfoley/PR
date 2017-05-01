@@ -22,4 +22,4 @@ class Point(Shape):
         return (self._x,self._y)
 
     def getCOM(self):
-        return "Point object is returning COM"
+        pass

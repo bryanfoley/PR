@@ -59,7 +59,7 @@ class Quadrilateral(Shape):
         return self._angleD
 
     def getCOM(self):
-        return "Quadrilateral object is returning COM"
+        pass
 
     def getLeft(self):
         return self._left

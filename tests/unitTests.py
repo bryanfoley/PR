@@ -134,7 +134,7 @@ class TestShapeClass(unittest.TestCase):
 
 	def test_D002_test_shape_get_COM(self):
 		result = self.s1.getCOM()
-		self.assertEqual(result,"Shape object is returning COM")
+		self.assertEqual(type(self.s1),Shape)
 
 class TestPointClass(unittest.TestCase):
 	def setUp(self):
@@ -162,9 +162,9 @@ class TestPointClass(unittest.TestCase):
 
 	def test_E002_test_point_get_COM(self):
 		result = self.p1.getCOM()
-		self.assertEqual(result,"Point object is returning COM")
+		self.assertEqual(type(self.p1),Point)
 		result = self.p2.getCOM()
-		self.assertEqual(result,"Point object is returning COM")
+		self.assertEqual(type(self.p2),Point)
 
 class TestCircleClass(unittest.TestCase):
 	def setUp(self):
@@ -238,7 +238,7 @@ class TestQuadrilateralClass(unittest.TestCase):
 		result9 = self.q1.getAngleD()
 		self.assertEqual(result9,1.5708)
 		result10 = self.q1.getCOM()
-		self.assertEqual(result10,"Quadrilateral object is returning COM")
+		self.assertEqual(type(self.q1),Quadrilateral)
 		result11 = self.q1.getBottom()
 		self.assertEqual(result11,-1.0)
 		result12 = self.q1.getTop()
@@ -268,7 +268,7 @@ class TestQuadrilateralClass(unittest.TestCase):
 		result9 = self.q2.getAngleD()
 		self.assertEqual(result9,1.5711)
 		result10 = self.q2.getCOM()
-		self.assertEqual(result10,"Quadrilateral object is returning COM")
+		self.assertEqual(type(self.q2),Quadrilateral)
 
 	def test_G003_test_quadriilateral_set(self):
 		self.q2.setQuadrilateral((-8,2),(8,2),(8,-2),(-8,-2),1.5708,1.5709,1.5710,1.5711)
