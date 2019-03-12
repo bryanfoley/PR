@@ -1,0 +1,10 @@
+before_script:
+  - cd tests
+
+run-unittests:
+  script:
+    - python3 unitTests.py -v
+    
+run-component-test:
+  script:
+    - python3 componentTest.py
