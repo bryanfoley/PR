@@ -1,10 +1,36 @@
-before_script:
-  - cd tests
+image: python:3.6
+ 
+stages:
+ - lint
+ - test
+ 
+mypy:
+  stage: lint
+  script:
+   - pip3 install mypy
+   - python3 -m mypy --cache-dir=/dev/null assignment.py
+  tags:
+   - linux
+ 
+style:
+  stage: lint
+  script:
+   - pip3 install pycodestyle
+   - python3 -m pycodestyle src
+  tags:
+   - linux
+ 
+unittests:
+  stage: test
+  script:
+   - cd tests
+   - python3 unitTests.py -v
+  tags:
+   - linux
 
-run-unittests:
+component-test:
+  stage: test
   script:
-    - python3 unitTests.py -v
-    
-run-component-test:
-  script:
-    - python3 componentTest.py
+   - python3 componentTest.py
+  tags:
+   - linux
