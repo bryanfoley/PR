@@ -31,6 +31,7 @@ unittests:
 component-test:
   stage: test
   script:
+   - cd tests
    - python3 componentTest.py
   tags:
    - linux
