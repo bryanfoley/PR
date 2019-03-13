@@ -30,4 +30,6 @@ python3 unitTests.py -v
 To run the component test, cd to the tests dir and execute:
 python3 componentTest.py
 
+CI has been added to this repository, until this is verified to be working, manual testing will still be required.
+
 
