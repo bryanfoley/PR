@@ -16,7 +16,7 @@ style:
   stage: lint
   script:
    - pip3 install pycodestyle
-   - python3 -m pycodestyle src
+   - python3 -m pycodestyle --config pycodestyle.ini src
   tags:
    - linux
  
