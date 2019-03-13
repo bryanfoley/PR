@@ -18,12 +18,6 @@ def get_intersections(autos):
 
     return results
 
-def coarseOverlap(autoA,autoB):
-    if(COMoverlap(autoA,autoB)==True):
-        return True
-    else:
-        return (quadXquad(autoA,autoB))
-
 def sqr(x):
     return x*x
 
